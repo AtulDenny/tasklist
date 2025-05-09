@@ -18,7 +18,7 @@ const Dashboard = () => {
     return (
       <div>
         <h3>All Tasks</h3>
-        <p>⚠️ Tasks not an array. Actual value:</p>
+        <p> Tasks not an array. Actual value:</p>
         <pre>{JSON.stringify(tasks, null, 2)}</pre>
       </div>
     );

@@ -15,16 +15,16 @@ export const addTask = createAsyncThunk("tasks/add", async (task) => {
 
 const tasksSlice = createSlice({
   name: "tasks",
-  initialState: [], // ✅ Ensure tasks is always an array
+  initialState: [], 
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchTasks.fulfilled, (_, action) => {
-        console.log("✅ Redux fetchTasks.fulfilled:", action.payload);
+        console.log(" Redux fetchTasks.fulfilled:", action.payload);
         return action.payload;
       })
       .addCase(addTask.fulfilled, (state, action) => {
-        console.log("✅ Redux addTask.fulfilled:", action.payload);
+        console.log(" Redux addTask.fulfilled:", action.payload);
         state.push(action.payload);
       });
   },

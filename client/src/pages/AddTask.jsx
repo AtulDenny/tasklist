@@ -22,12 +22,10 @@ const AddTask = () => {
     dispatch(addTask(formData))
       .unwrap()
       .then(() => {
-        alert("✅ Task added successfully!");
+        alert(" Task added successfully!");
         navigate("/");
       });
   };
-
-  // ✅ jQuery validation
   useEffect(() => {
     $("#taskForm").on("submit", function (e) {
       if ($("#title").val().trim() === "") {

@@ -14,7 +14,7 @@ const TaskDetails = () => {
         setTask(res.data);
       })
       .catch((err) => {
-        console.error("❌ Error fetching task:", err);
+        console.error(" Error fetching task:", err);
         setError("Could not fetch task details.");
       });
   }, [id]);
