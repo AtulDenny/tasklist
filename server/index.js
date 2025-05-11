@@ -32,5 +32,13 @@ app.get("/api/tasks/:id", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+app.delete("/api/tasks/:id", async (req, res) => {
+  try {
+    await Task.findByIdAndDelete(req.params.id);
+    res.json({ message: "Task deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete task" });
+  }
+});
 
 app.listen(5000, () => console.log("Server started on port 5000"));

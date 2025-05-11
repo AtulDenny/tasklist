@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTasks } from "../redux/tasksSlice";
+import { fetchTasks, deleteTask } from "../redux/tasksSlice";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -11,17 +11,8 @@ const Dashboard = () => {
     dispatch(fetchTasks());
   }, [dispatch]);
 
-  console.log("Fetched tasks:", tasks);
-  console.log("Type of tasks:", typeof tasks);
-
   if (!Array.isArray(tasks)) {
-    return (
-      <div>
-        <h3>All Tasks</h3>
-        <p> Tasks not an array. Actual value:</p>
-        <pre>{JSON.stringify(tasks, null, 2)}</pre>
-      </div>
-    );
+    return <p>Loading...</p>;
   }
 
   return (
@@ -30,13 +21,20 @@ const Dashboard = () => {
       {tasks.length > 0 ? (
         <div className="list-group">
           {tasks.map((task) => (
-            <Link
+            <div
               key={task._id}
-              to={`/task/${task._id}`}
-              className="list-group-item list-group-item-action"
+              className="list-group-item d-flex justify-content-between align-items-center"
             >
-              <strong>{task.title}</strong> — {task.status || "pending"}
-            </Link>
+              <Link to={`/task/${task._id}`} className="text-decoration-none flex-grow-1">
+                <strong>{task.title}</strong> — {task.status || "pending"}
+              </Link>
+              <button
+                className="btn btn-sm btn-danger ms-2"
+                onClick={() => dispatch(deleteTask(task._id))}
+              >
+                Delete
+              </button>
+            </div>
           ))}
         </div>
       ) : (

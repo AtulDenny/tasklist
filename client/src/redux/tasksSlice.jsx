@@ -3,29 +3,31 @@ import axios from "axios";
 
 export const fetchTasks = createAsyncThunk("tasks/fetch", async () => {
   const res = await axios.get("/api/tasks");
-  console.log("📡 API fetched tasks:", res.data); // ✅ Debug log
   return res.data;
 });
 
 export const addTask = createAsyncThunk("tasks/add", async (task) => {
   const res = await axios.post("/api/tasks", task);
-  console.log("📤 API added task:", res.data); // ✅ Debug log
   return res.data;
+});
+
+export const deleteTask = createAsyncThunk("tasks/delete", async (id) => {
+  await axios.delete(`/api/tasks/${id}`);
+  return id;
 });
 
 const tasksSlice = createSlice({
   name: "tasks",
-  initialState: [], 
+  initialState: [],
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTasks.fulfilled, (_, action) => {
-        console.log(" Redux fetchTasks.fulfilled:", action.payload);
-        return action.payload;
-      })
+      .addCase(fetchTasks.fulfilled, (_, action) => action.payload)
       .addCase(addTask.fulfilled, (state, action) => {
-        console.log(" Redux addTask.fulfilled:", action.payload);
         state.push(action.payload);
+      })
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        return state.filter((task) => task._id !== action.payload);
       });
   },
 });
