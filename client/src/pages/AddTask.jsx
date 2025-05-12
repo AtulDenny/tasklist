@@ -30,7 +30,7 @@ const AddTask = () => {
     $("#taskForm").on("submit", function (e) {
       if ($("#title").val().trim() === "") {
         e.preventDefault();
-        alert("⚠️ Task title is required.");
+        alert("Task title is required.");
       }
     });
   }, []);

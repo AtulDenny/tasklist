@@ -15,7 +15,7 @@ const TaskDetails = () => {
         setTask(res.data);
       })
       .catch((err) => {
-        console.error("❌ Error fetching task:", err);
+        console.error("Error fetching task:", err);
         setError("Could not fetch task details.");
       });
   }, [id]);
@@ -26,10 +26,10 @@ const TaskDetails = () => {
         .delete(`/api/tasks/${id}`)
         .then(() => {
           alert("🗑️ Task deleted!");
-          navigate("/"); // Go back to Dashboard
+          navigate("/"); 
         })
         .catch((err) => {
-          console.error("❌ Error deleting task:", err);
+          console.error("Error deleting task:", err);
           alert("Failed to delete the task.");
         });
     }
